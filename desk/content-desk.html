@@ -1,0 +1,402 @@
+<title>AKITA Content Desk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow phone-first column; sticky header with counts and tabs; one card per scheduled post, grouped by publish day. */
+:root {
+  --bg: #F4F6F8;
+  --surface: #FFFFFF;
+  --surface-2: #EEF2F6;
+  --ink: #13253B;
+  --muted: #5B6B7E;
+  --line: #DCE3EA;
+  --navy: #1E3A5F;
+  --accent: #2E86C1;
+  --accent-ink: #FFFFFF;
+  --good: #1F7A50;
+  --good-bg: #E3F3EA;
+  --warn: #8A5A0B;
+  --warn-bg: #FBF0D9;
+  --info: #1E5F8F;
+  --info-bg: #E1EEF8;
+  --bad: #9B3A30;
+  --bad-bg: #F7E4E1;
+  --font-ui: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-meta: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --radius: 12px;
+  --scrim: rgba(9, 16, 26, .9);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1724; --surface: #152234; --surface-2: #1B2B40; --ink: #E6EDF5; --muted: #96A6B8; --line: #26384F;
+    --navy: #A9C9E8; --accent: #4FA3DA; --accent-ink: #0B1420;
+    --good: #6FD3A2; --good-bg: #13362A; --warn: #F0C06A; --warn-bg: #3A2D12; --info: #8CC4EC; --info-bg: #142F48; --bad: #F09A8F; --bad-bg: #3D1E1B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1724; --surface: #152234; --surface-2: #1B2B40; --ink: #E6EDF5; --muted: #96A6B8; --line: #26384F;
+  --navy: #A9C9E8; --accent: #4FA3DA; --accent-ink: #0B1420;
+  --good: #6FD3A2; --good-bg: #13362A; --warn: #F0C06A; --warn-bg: #3A2D12; --info: #8CC4EC; --info-bg: #142F48; --bad: #F09A8F; --bad-bg: #3D1E1B;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-ui); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 680px; margin: 0 auto; padding-block: 8px 48px; }
+
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 14px 10px; border-bottom: 1px solid var(--line); display: grid; gap: 10px;
+}
+.brandrow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+h1 { margin: 2px 0 0; font-size: 26px; line-height: 1.15; font-weight: 700; color: var(--navy); letter-spacing: -.01em; text-wrap: balance; }
+.summary { font-size: 13px; color: var(--muted); }
+.summary b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tab {
+  font: 500 13px/1 var(--font-ui); color: var(--muted); background: transparent; border: 1px solid var(--line);
+  border-radius: 999px; padding: 8px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center;
+}
+.tab[aria-selected="true"] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
+.tab .n { font-family: var(--font-meta); font-size: 11px; font-variant-numeric: tabular-nums; }
+.tab:focus-visible, button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.bulk { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+
+main { display: grid; gap: 22px; padding-top: 18px; }
+.day { display: grid; gap: 10px; }
+.day h2 { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; display: grid; gap: 10px; min-width: 0; }
+.card.is-decided { opacity: .86; }
+.meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: space-between; }
+.when { font-family: var(--font-meta); font-size: 12px; color: var(--ink); font-variant-numeric: tabular-nums; }
+.when span { color: var(--muted); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font-size: 11px; font-weight: 600; letter-spacing: .02em; padding: 3px 8px; border-radius: 6px; background: var(--surface-2); color: var(--ink); }
+.status { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+.st-pending { background: var(--warn-bg); color: var(--warn); }
+.st-approved { background: var(--good-bg); color: var(--good); }
+.st-changes { background: var(--info-bg); color: var(--info); }
+.st-rejected { background: var(--bad-bg); color: var(--bad); }
+.st-scheduled, .st-published { background: var(--navy); color: var(--bg); }
+
+.label { font-size: 16px; font-weight: 600; line-height: 1.3; margin: 0; text-wrap: balance; }
+.sub { font-size: 12px; color: var(--muted); }
+.copy {
+  white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14.5px; line-height: 1.55; margin: 0;
+  background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px; max-height: 15.5em; overflow: hidden; position: relative;
+}
+.copy.open { max-height: none; }
+.copy:not(.open)::after { content: ""; position: absolute; inset: auto 0 0; height: 3em; background: linear-gradient(transparent, var(--bg)); }
+.edited { font-size: 11px; font-weight: 600; color: var(--info); text-transform: uppercase; letter-spacing: .06em; }
+.tags { font-size: 13px; color: var(--accent); overflow-wrap: anywhere; }
+.media { display: flex; gap: 8px; flex-wrap: wrap; }
+.media .thumb { display: block; width: 150px; max-width: 100%; padding: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--surface-2); cursor: zoom-in; }
+.media .thumb img, .media .thumb video { display: block; width: 100%; height: auto; pointer-events: none; }
+.media .thumb.is-video { position: relative; }
+.media .thumb.is-video::after { content: "▶"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #FFFFFF; text-shadow: 0 1px 6px rgba(0,0,0,.5); }
+.lightbox video { max-width: 100%; max-height: 100%; border-radius: 10px; background: var(--ink); }
+.lightbox {
+  position: fixed; inset: 0; z-index: 30; background: var(--scrim); display: flex; align-items: center; justify-content: center; cursor: zoom-out;
+  padding: calc(56px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.lightbox img { max-width: 100%; max-height: 100%; border-radius: 10px; }
+.lightbox .close { position: absolute; top: calc(10px + env(safe-area-inset-top, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); background: var(--surface); color: var(--ink); }
+.medianote { font-size: 12px; color: var(--muted); }
+.note { font-size: 13px; background: var(--info-bg); color: var(--info); border-radius: 8px; padding: 8px 10px; }
+
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: 600 14px/1 var(--font-ui); border-radius: 10px; padding: 11px 14px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+button.ghost { background: transparent; }
+button.danger { color: var(--bad); }
+button.link { border: 0; background: none; padding: 4px 0; color: var(--accent); font-weight: 600; font-size: 13px; }
+button:disabled { opacity: .5; cursor: default; }
+textarea { width: 100%; min-height: 220px; font: 14px/1.5 var(--font-ui); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px; resize: vertical; }
+textarea.short { min-height: 90px; }
+.fieldlabel { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+input.tagsin { width: 100%; font: 14px/1.4 var(--font-ui); color: var(--accent); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.editor { display: grid; gap: 8px; }
+.count { font-family: var(--font-meta); font-size: 11px; color: var(--muted); }
+
+.confirm { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+.empty { text-align: left; background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius); padding: 22px; color: var(--muted); }
+.empty strong { color: var(--ink); display: block; margin-bottom: 4px; font-size: 16px; }
+.banner { font-size: 13px; color: var(--bad); background: var(--bad-bg); border-radius: 10px; padding: 10px 12px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--navy); color: var(--bg); padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 20; }
+@media (prefers-reduced-motion: no-preference) { .card { transition: opacity .2s ease; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brandrow">
+      <div>
+        <div class="eyebrow">AKITA Sales · Social</div>
+        <h1>Content Desk</h1>
+      </div>
+      <div class="summary" id="summary">Loading posts…</div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Filter posts">
+      <button class="tab" role="tab" id="tab-review" data-f="review" aria-selected="true">To review <span class="n" id="n-review">0</span></button>
+      <button class="tab" role="tab" id="tab-decided" data-f="decided" aria-selected="false">Decided <span class="n" id="n-decided">0</span></button>
+      <button class="tab" role="tab" id="tab-all" data-f="all" aria-selected="false">All <span class="n" id="n-all">0</span></button>
+    </div>
+    <div class="bulk" id="bulk" hidden></div>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+  <main id="list" aria-live="polite">
+    <div class="empty"><strong>Loading the week's posts</strong>Claude adds a new batch every Monday. Approve, edit or reject each post here, and approved posts are scheduled in Metricool.</div>
+  </main>
+</div>
+<div class="toast" id="toast" hidden></div>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
+  <button class="close" id="lb-close" type="button">Close</button>
+  <img id="lb-img" alt="">
+  <video id="lb-video" controls playsinline hidden></video>
+</div>
+
+<script>
+(function () {
+  var CH = { linkedin: "LinkedIn", facebook: "Facebook", instagram: "Instagram", youtube: "YouTube", tiktok: "TikTok", blog: "Blog" };
+  var STATUS = { pending: "To review", approved: "Approved", changes: "Changes requested", rejected: "Rejected", scheduled: "Scheduled", published: "Published" };
+  var db = null, canWrite = true, posts = [], filter = "review";
+  var ui = { open: {}, editing: null, noting: null, confirmAll: false, busy: {} };
+  var listEl = document.getElementById("list");
+
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === "text") n.textContent = attrs[k];
+      else if (k === "class") n.className = attrs[k];
+      else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), attrs[k]);
+      else if (attrs[k] !== null && attrs[k] !== undefined && attrs[k] !== false) n.setAttribute(k, attrs[k]);
+    }
+    (kids || []).forEach(function (c) { if (c) n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function toast(msg) {
+    var t = document.getElementById("toast"); t.textContent = msg; t.hidden = false;
+    clearTimeout(toast._t); toast._t = setTimeout(function () { t.hidden = true; }, 2200);
+  }
+  function banner(msg) { var b = document.getElementById("banner"); b.textContent = msg || ""; b.hidden = !msg; }
+
+  function fmt(iso, tz, opts) {
+    try { return new Intl.DateTimeFormat("en-GB", Object.assign({ timeZone: tz }, opts)).format(new Date(iso)); }
+    catch (e) { return ""; }
+  }
+  function dayKey(iso) { return fmt(iso, "Europe/Copenhagen", { year: "numeric", month: "2-digit", day: "2-digit" }); }
+  function dayLabel(iso) { return fmt(iso, "Europe/Copenhagen", { weekday: "long", day: "numeric", month: "long" }); }
+  function time(iso, tz) { return fmt(iso, tz, { hour: "2-digit", minute: "2-digit", hour12: false }); }
+
+  function isReview(p) { return p.status === "pending" || !p.status; }
+  function isDecided(p) { return !isReview(p); }
+  function visible() {
+    return posts.filter(function (p) { return filter === "all" ? true : filter === "review" ? isReview(p) : isDecided(p); });
+  }
+
+  async function write(id, patch, okMsg) {
+    if (!db) return;
+    ui.busy[id] = true; render();
+    try {
+      await db.doc("posts/" + id).update(Object.assign({ decidedAt: new Date().toISOString() }, patch));
+      if (okMsg) toast(okMsg);
+    } catch (e) {
+      if (e && e.code === "invalid_argument") { canWrite = false; banner("You can view this desk but not change it. Ask Mike for edit access."); }
+      else banner("That change didn't save. Check your connection and try again.");
+    } finally { delete ui.busy[id]; render(); }
+  }
+
+  async function approveAll() {
+    var ids = posts.filter(isReview).map(function (p) { return p.id; });
+    ui.confirmAll = false;
+    for (var i = 0; i < ids.length; i++) { await write(ids[i], { status: "approved" }); }
+    toast(ids.length + " posts approved");
+  }
+
+  function renderHeader() {
+    var review = posts.filter(isReview).length, decided = posts.length - review;
+    var approved = posts.filter(function (p) { return p.status === "approved" || p.status === "scheduled" || p.status === "published"; }).length;
+    document.getElementById("n-review").textContent = review;
+    document.getElementById("n-decided").textContent = decided;
+    document.getElementById("n-all").textContent = posts.length;
+    var s = document.getElementById("summary"); s.textContent = "";
+    if (!posts.length) { s.textContent = db ? "No posts yet" : ""; }
+    else { s.appendChild(el("b", { text: String(review) })); s.appendChild(document.createTextNode(" to review · ")); s.appendChild(el("b", { text: String(approved) })); s.appendChild(document.createTextNode(" approved")); }
+    ["review", "decided", "all"].forEach(function (f) { document.getElementById("tab-" + f).setAttribute("aria-selected", String(f === filter)); });
+
+    var bulk = document.getElementById("bulk"); bulk.textContent = "";
+    if (canWrite && review > 1 && filter !== "decided") {
+      bulk.hidden = false;
+      if (ui.confirmAll) {
+        bulk.appendChild(el("div", { class: "confirm" }, [
+          el("span", { text: "Approve all " + review + " posts as written?" }),
+          el("button", { class: "primary", id: "confirm-all", text: "Yes, approve all", onclick: approveAll }),
+          el("button", { class: "ghost", id: "cancel-all", text: "Cancel", onclick: function () { ui.confirmAll = false; render(); } })
+        ]));
+      } else {
+        bulk.appendChild(el("span", { text: "Read each post, or approve the whole batch at once." }));
+        bulk.appendChild(el("button", { class: "ghost", id: "approve-all", text: "Approve all " + review, onclick: function () { ui.confirmAll = true; render(); } }));
+      }
+    } else bulk.hidden = true;
+  }
+
+  function card(p) {
+    var st = p.status || "pending";
+    var decided = isDecided(p);
+    var locked = st === "scheduled" || st === "published";
+    var busy = !!ui.busy[p.id];
+    var text = p.editedText || p.text || "";
+    var tags = (typeof p.editedHashtags === "string" ? p.editedHashtags : p.hashtags) || "";
+    var c = el("article", { class: "card" + (decided ? " is-decided" : ""), id: "post-" + p.id });
+
+    var chips = el("div", { class: "chips" }, (p.channels || []).map(function (ch) { return el("span", { class: "chip", text: CH[ch] || ch }); }));
+    var when = el("div", { class: "when" }, [time(p.scheduledAt, "Europe/Copenhagen") + " CPH ", el("span", { text: "· " + time(p.scheduledAt, "Asia/Dubai") + " Dubai" })]);
+    c.appendChild(el("div", { class: "meta" }, [el("div", { class: "chips" }, [when]), el("span", { class: "status st-" + st, text: STATUS[st] || st })]));
+    c.appendChild(chips);
+    if (p.label) c.appendChild(el("h3", { class: "label", text: p.label }));
+    var subBits = [p.format, p.pillar].filter(Boolean).join(" · ");
+    if (subBits) c.appendChild(el("div", { class: "sub", text: subBits }));
+
+    if (ui.editing === p.id) {
+      var ta = el("textarea", { id: "edit-" + p.id, "aria-label": "Edit post text" });
+      ta.value = text;
+      var cnt = el("span", { class: "count", text: ta.value.length + " characters" });
+      ta.addEventListener("input", function () { cnt.textContent = ta.value.length + " characters"; });
+      var tagIn = el("input", { type: "text", class: "tagsin", id: "tags-" + p.id, autocomplete: "off", spellcheck: "false", placeholder: "#FieldSales #SalesManagement" });
+      tagIn.value = tags;
+      c.appendChild(el("div", { class: "editor" }, [ta, cnt,
+        el("label", { class: "fieldlabel", for: "tags-" + p.id, text: "Hashtags" }), tagIn,
+        el("div", { class: "actions" }, [
+        el("button", { class: "primary", id: "save-" + p.id, text: "Save and approve", disabled: busy || null, onclick: function () {
+          var v = ta.value.trim(); if (!v) { ta.focus(); return; }
+          ui.editing = null; write(p.id, { status: "approved", editedText: v, editedHashtags: tagIn.value.trim() }, "Saved and approved");
+        } }),
+        el("button", { class: "ghost", id: "cancel-edit-" + p.id, text: "Cancel", onclick: function () { ui.editing = null; render(); } })
+      ])]));
+    } else {
+      if (p.editedText) c.appendChild(el("div", { class: "edited", text: "Your edited version" }));
+      var copy = el("p", { class: "copy" + (ui.open[p.id] || text.length < 420 ? " open" : ""), text: text });
+      c.appendChild(copy);
+      if (text.length >= 420) c.appendChild(el("button", { class: "link", id: "more-" + p.id, text: ui.open[p.id] ? "Show less" : "Show the full post", onclick: function () { ui.open[p.id] = !ui.open[p.id]; render(); } }));
+    }
+    if (tags && ui.editing !== p.id) c.appendChild(el("div", { class: "tags", text: tags }));
+    if (p.media && p.media.length) {
+      c.appendChild(el("div", { class: "media" }, p.media.map(function (m) {
+        var isVideo = m.kind === "video" || /\.mp4($|\?)/i.test(m.url || "");
+        var inner = isVideo
+          ? el("video", { src: m.url, muted: "", playsinline: "", preload: "metadata", "aria-label": m.alt || "Reel" })
+          : el("img", { src: m.url, alt: m.alt || "Post image", loading: "lazy" });
+        return el("button", { class: "thumb" + (isVideo ? " is-video" : ""), type: "button", "aria-label": isVideo ? "Play video" : "Open image larger", onclick: function () { openLightbox(m.url, m.alt, isVideo); } }, [inner]);
+      })));
+    }
+    if (p.mediaNote) c.appendChild(el("div", { class: "medianote", text: p.mediaNote }));
+    if (p.note && st === "changes") c.appendChild(el("div", { class: "note", text: "Your note to Claude: " + p.note }));
+    if (p.claudeNote) c.appendChild(el("div", { class: "sub", text: p.claudeNote }));
+
+    if (ui.noting === p.id) {
+      var nt = el("textarea", { class: "short", id: "note-" + p.id, "aria-label": "What should change", placeholder: "What should Claude change? E.g. shorter, less salesy, mention battles." });
+      c.appendChild(el("div", { class: "editor" }, [nt, el("div", { class: "actions" }, [
+        el("button", { class: "primary", id: "send-note-" + p.id, text: "Send to Claude", disabled: busy || null, onclick: function () {
+          var v = nt.value.trim(); if (!v) { nt.focus(); return; }
+          ui.noting = null; write(p.id, { status: "changes", note: v }, "Sent to Claude");
+        } }),
+        el("button", { class: "ghost", id: "cancel-note-" + p.id, text: "Cancel", onclick: function () { ui.noting = null; render(); } })
+      ])]));
+    } else if (canWrite && ui.editing !== p.id && !locked) {
+      var acts = [];
+      if (!decided) {
+        acts.push(el("button", { class: "primary", id: "approve-" + p.id, text: "Approve", disabled: busy || null, onclick: function () { write(p.id, { status: "approved" }, "Approved"); } }));
+        acts.push(el("button", { id: "editbtn-" + p.id, text: "Edit", disabled: busy || null, onclick: function () { ui.editing = p.id; ui.noting = null; render(); } }));
+        acts.push(el("button", { class: "ghost", id: "changes-" + p.id, text: "Ask for changes", disabled: busy || null, onclick: function () { ui.noting = p.id; ui.editing = null; render(); } }));
+        acts.push(el("button", { class: "ghost danger", id: "reject-" + p.id, text: "Reject", disabled: busy || null, onclick: function () { write(p.id, { status: "rejected" }, "Rejected"); } }));
+      } else {
+        acts.push(el("button", { class: "ghost", id: "undo-" + p.id, text: "Move back to review", disabled: busy || null, onclick: function () { write(p.id, { status: "pending" }, "Moved back to review"); } }));
+      }
+      c.appendChild(el("div", { class: "actions" }, acts));
+    } else if (locked && p.plannerUrl) {
+      c.appendChild(el("a", { href: p.plannerUrl, target: "_blank", rel: "noopener", class: "sub", text: "Open in Metricool" }));
+    }
+    return c;
+  }
+
+  function render() {
+    renderHeader();
+    listEl.textContent = "";
+    if (!db) {
+      listEl.appendChild(el("div", { class: "empty" }, [el("strong", { text: "Open this desk in Claude to review posts" }), "The posts load from the desk's own storage, which is only available inside Claude."]));
+      return;
+    }
+    var rows = visible();
+    if (!rows.length) {
+      var msg = filter === "review"
+        ? ["Nothing waiting for you", "Every post this week has a decision. Claude adds the next batch on Monday."]
+        : filter === "decided" ? ["No decisions yet", "Approved, edited and rejected posts show up here."]
+        : ["No posts yet", "Claude adds a new batch every Monday morning."];
+      listEl.appendChild(el("div", { class: "empty" }, [el("strong", { text: msg[0] }), msg[1]]));
+      return;
+    }
+    var groups = {}, order = [];
+    rows.slice().sort(function (a, b) { return String(a.scheduledAt).localeCompare(String(b.scheduledAt)); })
+      .forEach(function (p) { var k = dayKey(p.scheduledAt); if (!groups[k]) { groups[k] = []; order.push(k); } groups[k].push(p); });
+    order.forEach(function (k) {
+      var sec = el("section", { class: "day" }, [el("h2", { text: dayLabel(groups[k][0].scheduledAt) })]);
+      groups[k].forEach(function (p) { sec.appendChild(card(p)); });
+      listEl.appendChild(sec);
+    });
+  }
+
+  var lb = document.getElementById("lightbox"), lbImg = document.getElementById("lb-img"), lastFocus = null;
+  var lbVideo = document.getElementById("lb-video");
+  function openLightbox(url, alt, isVideo) {
+    lastFocus = document.activeElement;
+    if (isVideo) {
+      lbImg.hidden = true; lbVideo.hidden = false; lbVideo.src = url;
+      try { var pr = lbVideo.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
+    } else {
+      lbVideo.hidden = true; lbImg.hidden = false; lbImg.src = url; lbImg.alt = alt || "Post image";
+    }
+    lb.hidden = false;
+    document.getElementById("lb-close").focus();
+  }
+  function closeLightbox() {
+    if (lb.hidden) return;
+    lb.hidden = true; lbImg.removeAttribute("src");
+    try { lbVideo.pause(); } catch (e) {}
+    lbVideo.removeAttribute("src"); lbVideo.load();
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  lb.addEventListener("click", function (e) { if (e.target !== lbVideo) closeLightbox(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLightbox(); });
+
+  document.querySelectorAll(".tab").forEach(function (t) {
+    t.addEventListener("click", function () { filter = t.getAttribute("data-f"); ui.confirmAll = false; render(); });
+  });
+
+  render();
+  (async function boot() {
+    if (!window.claude || !window.claude.use) { render(); return; }
+    db = await window.claude.use("db");
+    if (!db) { render(); return; }
+    try {
+      var user = await window.claude.use("user");
+      if (user) { var w = await user.can("data.write"); if (w === false) canWrite = false; }
+    } catch (e) {}
+    db.collection("posts").orderBy("scheduledAt").onSnapshot(function (snap) {
+      posts = snap.docs.map(function (d) { return Object.assign({ id: d.id }, d.data()); });
+      if (!boot.first) { boot.first = true; if (!posts.some(isReview) && posts.length) filter = "all"; }
+      render();
+    }, function () { banner("The desk lost its connection. Reload the page to see the latest posts."); });
+  })();
+})();
+</script>

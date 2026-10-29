@@ -23,7 +23,7 @@ from pathlib import Path
 API = "https://api.elevenlabs.io/v1"
 KEY = os.environ.get("ELEVENLABS_API_KEY", "").strip()
 ROOT = Path(__file__).resolve().parent.parent
-FALLBACK_VOICES = ["George", "Daniel", "Brian"]
+FALLBACK_VOICES = ["Brian", "Chris", "Liam"]
 _voice_cache = None
 
 
@@ -61,7 +61,7 @@ def voice_id(name):
     raise SystemExit("No ElevenLabs voices available on this account")
 
 
-DEFAULT_SETTINGS = {"stability": 0.35, "similarity_boost": 0.8, "style": 0.45, "use_speaker_boost": True}
+DEFAULT_SETTINGS = {"stability": 0.32, "similarity_boost": 0.8, "style": 0.5, "use_speaker_boost": True}
 
 
 def exact_voice_id(name):
@@ -157,11 +157,11 @@ def main():
         dur = duration(visual)
         if spec.get("voice_sample"):
             vs = spec["voice_sample"]
-            tts(vs["text"], vs.get("voice", "George"), folder / "voice-sample.mp3")
+            tts(vs["text"], vs.get("voice", "Brian"), folder / "voice-sample.mp3")
         music(spec["music"]["prompt"], dur, folder / "music.mp3")
         if spec.get("voiceover"):
             vo = spec["voiceover"]
-            tts(vo["text"], vo.get("voice", "George"), folder / "voiceover.mp3")
+            tts(vo["text"], vo.get("voice", "Brian"), folder / "voiceover.mp3")
         mix(folder, visual, dur, spec)
         print(f"  final.mp4 {duration(folder / 'final.mp4'):.1f}s")
         built += 1
