@@ -1,0 +1,45 @@
+name: Fetch media
+
+# Downloads a file from a URL (for example a Canva export) into the repo,
+# so Claude can use it when its own workspace cannot reach that host.
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "File URL to download"
+        required: true
+      path:
+        description: "Repo path to save it to, e.g. drafts/2026-W46/location.png"
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-media
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download
+        env:
+          SRC_URL: ${{ inputs.url }}
+          DEST: ${{ inputs.path }}
+        run: |
+          case "$DEST" in drafts/*|media/*|reels/*) ;; *) echo "path must start with drafts/, media/ or reels/"; exit 1;; esac
+          case "$DEST" in *..*) echo "path may not contain .."; exit 1;; esac
+          mkdir -p "$(dirname "$DEST")"
+          curl -fsSL --max-filesize 104857600 -o "$DEST" "$SRC_URL"
+          ls -la "$DEST"
+      - name: Commit
+        env:
+          DEST: ${{ inputs.path }}
+        run: |
+          git config user.name "akita-social-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git diff --cached --quiet || (git commit -m "Fetch media $DEST [skip ci]" && git push)

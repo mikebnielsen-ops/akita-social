@@ -70,6 +70,8 @@ Rotate topics. Don't repeat a hook within 6 weeks. Topics bank: live sales overv
 - The GitHub Action "Reel audio" adds ElevenLabs music and voice when `spec.json` is pushed, and commits `final.mp4`.
 - Instagram audio: if Mike has named an Instagram track (in a desk note or in this file under "Current Instagram tracks"), attach it with `instagramData.audioConfiguration` (audioId = the track name; set `videoVolume` 0 when the Reel has music only). Otherwise use the video's own audio.
 - Screenshots: only from the demo company. Never show Frontliner, AM, real people's names or real client logos.
+- AI location images: generate in Canva (generate-image, portrait 4:5 if possible), get a download URL (export), then run the "Fetch media" workflow (`gh api -X POST repos/mikebnielsen-ops/akita-social/actions/workflows/fetch-media.yml/dispatches -f ref=main -f inputs[url]=<url> -f inputs[path]=drafts/<week>/<file>.png`), wait for it, pull, and use the file. The workspace itself cannot download from Canva. If any step fails, use a branded card instead and say so in the desk document's `claudeNote`.
+- `drafts/` may hold not-yet-approved AI images. Everything else in this repo is approved.
 
 ### Current Instagram tracks
 
