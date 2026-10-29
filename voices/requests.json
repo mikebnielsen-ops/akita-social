@@ -1,0 +1,5 @@
+{
+  "voices": ["Liam", "Chris", "Brian", "Jessica"],
+  "text": "It's 4 p.m. Do you know what your team sold today? Not yesterday. Today. With AKITA, every sale shows up the second it's made. So you know who needs a call, while there's still time.",
+  "settings": {"stability": 0.32, "similarity_boost": 0.8, "style": 0.5, "use_speaker_boost": true}
+}

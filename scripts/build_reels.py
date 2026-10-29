@@ -61,14 +61,48 @@ def voice_id(name):
     raise SystemExit("No ElevenLabs voices available on this account")
 
 
-def tts(text, voice, out):
+DEFAULT_SETTINGS = {"stability": 0.35, "similarity_boost": 0.8, "style": 0.45, "use_speaker_boost": True}
+
+
+def exact_voice_id(name):
+    global _voice_cache
+    if _voice_cache is None:
+        _voice_cache = json.loads(call("GET", "/voices", accept="application/json")).get("voices", [])
+    for v in _voice_cache:
+        if v.get("name", "").split(" ")[0].lower() == name.lower():
+            return v["voice_id"]
+    return None
+
+
+def tts(text, voice, out, settings=None, vid=None):
     audio = call(
-        "POST", f"/text-to-speech/{voice_id(voice)}",
+        "POST", f"/text-to-speech/{vid or voice_id(voice)}",
         body={"text": text, "model_id": "eleven_multilingual_v2",
-              "voice_settings": {"stability": 0.5, "similarity_boost": 0.75}},
+              "voice_settings": settings or DEFAULT_SETTINGS},
         query={"output_format": "mp3_44100_128"},
     )
     out.write_bytes(audio)
+
+
+def voice_samples():
+    req = ROOT / "voices" / "requests.json"
+    if not req.exists():
+        return 0
+    spec = json.loads(req.read_text())
+    made = 0
+    for name in spec.get("voices", []):
+        out = ROOT / "voices" / f"sample-{name.lower()}.mp3"
+        if out.exists():
+            continue
+        vid = exact_voice_id(name)
+        if not vid:
+            names = ", ".join(sorted(v.get("name", "").split(" ")[0] for v in _voice_cache))
+            print(f"  voice '{name}' not on this account. Available: {names}")
+            continue
+        tts(spec["text"], name, out, spec.get("settings"), vid=vid)
+        print(f"  sample {out.name}")
+        made += 1
+    return made
 
 
 def music(prompt, seconds, out):
@@ -107,6 +141,7 @@ def mix(folder, visual, dur, spec):
 def main():
     if not KEY:
         raise SystemExit("ELEVENLABS_API_KEY is not set")
+    print(f"voice samples made: {voice_samples()}")
     specs = sorted(ROOT.glob("reels/*/*/spec.json"))
     built = 0
     for spec_path in specs:
