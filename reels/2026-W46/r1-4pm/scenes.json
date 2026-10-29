@@ -1,0 +1,10 @@
+{
+  "scenes": [
+    {"dur": 2.4, "lines": [{"text": "It's 4 pm.", "style": "h1"}]},
+    {"dur": 3.0, "lines": [{"text": "Do you know what your team sold today?", "style": "h1"}]},
+    {"dur": 2.8, "lines": [{"text": "Not yesterday.", "style": "dim"}, {"text": "Today.", "style": "accent"}]},
+    {"dur": 3.6, "lines": [{"text": "In AKITA every sale shows up the second it's made.", "style": "h1"}, {"text": "Per rep. Per team. Per location.", "style": "small"}]},
+    {"dur": 2.8, "lines": [{"text": "Know who needs a call.", "style": "h1"}, {"text": "While there's still time.", "style": "accent"}]}
+  ],
+  "end": {"dur": 3.0}
+}

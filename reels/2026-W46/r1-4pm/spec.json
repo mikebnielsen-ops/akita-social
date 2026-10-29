@@ -1,0 +1,7 @@
+{
+  "visual": "visual.mp4",
+  "music": {"prompt": "Modern minimal electronic track for a short business video. Confident, upbeat, clean pulsing synth bass, light percussion, steady 110 BPM, builds slightly toward the end. No vocals."},
+  "music_volume": 0.9,
+  "voiceover": null,
+  "voice_sample": {"voice": "George", "text": "It's four p.m. Do you know what your team sold today? Not yesterday. Today. With AKITA, every sale shows up the second it's made."}
+}
