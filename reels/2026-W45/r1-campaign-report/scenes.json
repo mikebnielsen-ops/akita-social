@@ -1,0 +1,77 @@
+{
+  "scenes": [
+    {
+      "dur": 2.4,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Your client calls."
+        }
+      ]
+    },
+    {
+      "dur": 3,
+      "lines": [
+        {
+          "style": "accent",
+          "text": "\"So how did the campaign go?\""
+        }
+      ]
+    },
+    {
+      "dur": 2.8,
+      "lines": [
+        {
+          "style": "dim",
+          "text": "You say:"
+        },
+        {
+          "style": "h1",
+          "text": "\"Let me get back to you.\""
+        }
+      ]
+    },
+    {
+      "dur": 3.4,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Then three days of chasing team leaders."
+        },
+        {
+          "style": "small",
+          "text": "WhatsApp. Excel. Numbers that don't add up."
+        }
+      ]
+    },
+    {
+      "dur": 3.6,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "In AKITA the answer is already there."
+        },
+        {
+          "style": "small",
+          "text": "Per campaign. Per location. Per day."
+        }
+      ]
+    },
+    {
+      "dur": 2.8,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Answer on the call."
+        },
+        {
+          "style": "accent",
+          "text": "Not three days later."
+        }
+      ]
+    }
+  ],
+  "end": {
+    "dur": 3
+  }
+}

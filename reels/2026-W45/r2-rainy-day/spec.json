@@ -1,0 +1,11 @@
+{
+  "visual": "visual.mp4",
+  "music": {
+    "prompt": "Calm, minimal electronic underscore for a short business video with voice-over. Soft rain-like texture, steady gentle pulse at 95 BPM, no vocals, leaves room for speech."
+  },
+  "music_volume": 0.9,
+  "voiceover": {
+    "text": "It's raining. Half the team texts you: Nothing's happening here. Is it the weather? Or the location? Without today's numbers, you're guessing. In AKITA, you see every location live. Move the team before the day is gone. Bad days happen. Lost days don't have to.",
+    "voice": "Brian"
+  }
+}

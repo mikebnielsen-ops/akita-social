@@ -1,0 +1,86 @@
+{
+  "scenes": [
+    {
+      "dur": 1.8,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "It's raining."
+        }
+      ]
+    },
+    {
+      "dur": 3.7,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Half the team texts you:"
+        },
+        {
+          "style": "dim",
+          "text": "\"Nothing's happening here.\""
+        }
+      ]
+    },
+    {
+      "dur": 3.3,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Is it the weather?"
+        },
+        {
+          "style": "accent",
+          "text": "Or the location?"
+        }
+      ]
+    },
+    {
+      "dur": 2.5,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Without today's numbers, you're guessing."
+        }
+      ]
+    },
+    {
+      "dur": 3.3,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "In AKITA you see every location live."
+        }
+      ]
+    },
+    {
+      "dur": 3.7,
+      "lines": [
+        {
+          "style": "h1",
+          "text": "Move the team"
+        },
+        {
+          "style": "accent",
+          "text": "before the day is gone."
+        }
+      ]
+    },
+    {
+      "dur": 3.7,
+      "lines": [
+        {
+          "style": "dim",
+          "text": "Bad days happen."
+        },
+        {
+          "style": "accent",
+          "text": "Lost days don't have to."
+        }
+      ]
+    }
+  ],
+  "end": {
+    "dur": 3
+  }
+}
