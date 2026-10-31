@@ -52,6 +52,17 @@ Mike rejected an earlier, more polished batch as "not good": too long, too corpo
 
 Every post must have an image. No exceptions.
 
+### Launch phase (31 October to 22 November 2026)
+
+Mike's decision, 31 October 2026: post almost every day for the first three weeks so the channels have content quickly. Aim for 10 to 12 pieces a week in total, then return to the normal mix above.
+
+- LinkedIn: at most one post a day (Reels count). Weekdays as normal, plus one on Saturday or Sunday at most.
+- Facebook: everything LinkedIn gets, plus weekend posts.
+- Instagram: one post every day, Reels included. Two a day is fine on weekends to fill the grid.
+- Reels: 3 to 4 a week (Instagram, Facebook, YouTube Shorts, and LinkedIn on days with no other LinkedIn post).
+- Extra posts are mostly "what AKITA can do" with screens from `library/screens/`, rendered with `scripts/render_screen_card.py`, and carousels of a flow (one screen per slide). More angles on the topics bank, not weaker posts. The voice rules still apply.
+- Weekend times: 10:00, 13:00 and 17:00.
+
 Rotate topics. Don't repeat a hook within 6 weeks. Topics bank: live sales overview, new reps quitting, locations that don't pay, Sunday Excel reporting, competitions that die early, team leader time, morning briefing, cost per sale, client asking "how did the campaign go?", reps who hide, onboarding a new rep, weather and bad days, season finals and divisions, Wall of Fame.
 
 ## Reels
@@ -111,6 +122,7 @@ Do not copy:
 
 ## Images and Reels
 
+- Screen cards: `python3 scripts/render_screen_card.py '{"theme":"dark|light","eyebrow":"Topic","l1":"Headline","l2":"Second line","screen":"library/screens/phone-12-my-stats.png","step":"1/6"}' out.png` (step is optional, for carousels). Carousels: format "Carousel", several images in `media`, all sent in Metricool `media` in order.
 - Cards: `python3 scripts/render_card.py '{"theme":"dark|light","eyebrow":"Topic","l1":"Hook","l2":"Second line"}' out.png`. Alternate dark and light through the week.
 - Kinetic-text Reels: write `reels/<ISO week>/<id>/scenes.json` (scenes of 2.4 to 3.6 s, last scene a takeaway, end card is automatic), render with `python3 scripts/render_text_reel.py scenes.json visual.mp4`, and write `spec.json` with a music prompt. Voice-over is optional: voice "Brian", and the visuals must follow the spoken words (about 2.5 words per second).
 - The GitHub Action "Reel audio" adds ElevenLabs music and voice when `spec.json` is pushed, and commits `final.mp4`.
