@@ -84,11 +84,17 @@ Rules for every Reel:
 - People in Reels are AI-made. Do not film real reps, customers or passers-by.
 - Scenes with people are real video: the people move. Never a zoom on a still image.
 - A rep is never alone in a shot. Either the rep is talking with a customer, or two reps are talking or giving a high five. Very important.
-- No other people in the background of AI video. They appear from nowhere and walk into walls. Ask for an empty, still background, and check it frame by frame.
+- The place must feel alive: stocked shelves and other people in the background, never an empty location. Nobody may appear from nowhere or walk into a wall. Keep the people from the start image and let them stay in place with small movements. Check the background frame by frame.
+- Show start images to Mike and get his OK before making any video.
 - AI people are fictional. Never present one as a real rep, employee or customer. No testimonials, quotes or results from them.
 - AI people must not look like a real person. No real brands, logos or workwear in the scene.
 - Mark AI content: `isAiGenerated: true` on Instagram, and the matching AI label on any other channel that has one.
-- Field marketing, not door-to-door: reps stop people on the street and in shopping centres. Say "location", never "stand".
+- Field marketing first: reps stop people on the street and in shopping centres. Say "location", never "stand".
+- Door-to-door scenes at private homes are also welcome. They take place in Sweden, Norway or England, and the houses must match the country. They must feel natural, never staged. A quiet street with nobody else is fine, and nobody stands around watching. People in the scene speak the local language: Swedish, Norwegian, or English with a British accent. The voice-over, subtitles and post text stay in English.
+- Speech that can be heard in a clip must be sales talk: the rep greets, asks for a moment and presents an offer, and the customer answers. No random small talk. Nobody may say they come from the municipality, a public authority or any other organisation.
+- Describe in words what the people talk about. Do not put exact quoted lines in the video instruction, because Google blocked that request. The tool writes the final words itself, so read a transcript of the speech in every clip before showing it to Mike. If a line is wrong, make the clip again. Never cut a line out of the sound, because the gap sounds wrong.
+- Vary the tablets: different cover colours and types across scenes, never the same cover everywhere.
+- A tablet screen must never be visible in an AI scene, because AI screens look fake. Show the back of the tablet, or keep it under the arm. AKITA itself is only shown with real demo screens in their own shots.
 - Screens come only from the demo company, at calm speed. Never speed a clip up. Reps are shown on phone, leaders on desktop. `library/clips/` and `library/screens/` hold approved material.
 - Always subtitles.
 - Google Omni Flash (`gemini-omni-1.1-flash`) makes the video, on Mike's own paid Gemini API key. Test one clip and show it to Mike before making more. If the tool fails or the result is not good enough, use Kinetic text and say so in the desk document's `claudeNote`.
