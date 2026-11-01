@@ -4,7 +4,11 @@ This file tells Claude how to run AKITA Sales' social media every week. The sche
 
 ## Who we talk to
 
-Owners, CEOs and sales directors at field marketing, door-to-door, retail promotion and telemarketing companies, mainly in Denmark, Norway, Sweden and the UK. Secondary: in-house field sales teams.
+Owners, CEOs and sales directors at companies that sell in the field.
+
+- Primary markets: Denmark, Norway, Sweden and Finland. Secondary: England, Germany, the Netherlands, Belgium, France, Italy, Spain and others.
+- Primary buyers: field marketing (reps at locations in shops, squares, fairs, pedestrian streets and airports), charity and NGO fundraising, door-to-door sales, and companies with driving sales reps, both in-house and selling for others. Secondary: telemarketing.
+- Rotate the buyer types across the week, so not every post is written for field marketing.
 
 They care about: knowing today's sales today, keeping new reps past week two, locations that don't pay, team leaders drowning in manual reporting, motivation that lasts the whole week, and cost per sale.
 
@@ -12,6 +16,12 @@ They care about: knowing today's sales today, keeping new reps past week two, lo
 
 Mike's rules: simple, direct, human. Start with a problem the reader already knows from their own day. Solve it. Mention AKITA only as the fix, near the end.
 
+Main message: "One system instead of five." Use it as a thread through the content, not in every post. Hooks still open on a problem the reader knows.
+
+If the social-copywriter skill is available, use it when writing or revising posts. This file wins wherever they differ.
+
+- Name AKITA in every post. A post that only says "an app" fails, because a competitor could post it unchanged.
+- Do not mention prices or trial offers in posts until Mike says so.
 - Short sentences. Plain words. One idea per line.
 - Open with a hook line that names a real situation ("It's 4 pm.", "Sunday. 9 pm. Laptop open.").
 - Concrete details from the street: reps, team leaders, locations, WhatsApp, Excel, Friday meetings.
@@ -56,14 +66,14 @@ Every post must have an image. No exceptions.
 
 Mike's decision, 31 October 2026: post almost every day for the first three weeks so the channels have content quickly. Aim for 10 to 12 pieces a week in total, then return to the normal mix above.
 
-- LinkedIn: at most one post a day (Reels count). Weekdays as normal, plus one on Saturday or Sunday at most.
+- LinkedIn: gets everything planned for it. A post and a Reel on the same day is fine. Mike's decision, 1 November 2026: do not cut the number of posts, especially at the start. Weekdays as normal, plus one on Saturday or Sunday at most.
 - Facebook: everything LinkedIn gets, plus weekend posts.
 - Instagram: one post every day, Reels included. Two a day is fine on weekends to fill the grid.
-- Reels: 3 to 4 a week (Instagram, Facebook, YouTube Shorts, and LinkedIn on days with no other LinkedIn post).
+- Reels: 3 to 4 a week on Instagram, Facebook, YouTube Shorts and LinkedIn.
 - Extra posts are mostly "what AKITA can do" with screens from `library/screens/`, rendered with `scripts/render_screen_card.py`, and carousels of a flow (one screen per slide). More angles on the topics bank, not weaker posts. The voice rules still apply.
 - Weekend times: 10:00, 13:00 and 17:00.
 
-Rotate topics. Don't repeat a hook within 6 weeks. Topics bank: live sales overview, new reps quitting, locations that don't pay, Sunday Excel reporting, competitions that die early, team leader time, morning briefing, cost per sale, client asking "how did the campaign go?", reps who hide, onboarding a new rep, weather and bad days, season finals and divisions, Wall of Fame.
+Rotate topics. Don't repeat a hook within 6 weeks, and don't reuse a full line between a post and a Reel in that time. Topics bank: live sales overview, new reps quitting, locations that don't pay, Sunday Excel reporting, competitions that die early, team leader time, morning briefing, cost per sale, client asking "how did the campaign go?", reps who hide, onboarding a new rep, weather and bad days, season finals and divisions, Wall of Fame.
 
 ## Reels
 
@@ -89,7 +99,7 @@ Rules for every Reel:
 - AI people are fictional. Never present one as a real rep, employee or customer. No testimonials, quotes or results from them.
 - AI people must not look like a real person. No real brands, logos or workwear in the scene.
 - Mark AI content: `isAiGenerated: true` on Instagram, and the matching AI label on any other channel that has one.
-- Field marketing first: reps stop people on the street and in shopping centres. Say "location", never "stand".
+- Field marketing first: reps stop people on the street and in shopping centres. Say "location", never "stand", not even as a verb ("the team stands there", "stand out"). Write "the team is there".
 - Door-to-door scenes at private homes are also welcome. They take place in Sweden, Norway or England, and the houses must match the country. They must feel natural, never staged. A quiet street with nobody else is fine, and nobody stands around watching. People in the scene speak the local language: Swedish, Norwegian, or English with a British accent. The voice-over, subtitles and post text stay in English.
 - Speech that can be heard in a clip must be sales talk: the rep greets, asks for a moment and presents an offer, and the customer answers. No random small talk. Nobody may say they come from the municipality, a public authority or any other organisation.
 - Describe in words what the people talk about. Do not put exact quoted lines in the video instruction, because Google blocked that request. The tool writes the final words itself, so read a transcript of the speech in every clip before showing it to Mike. If a line is wrong, make the clip again. Never cut a line out of the sound, because the gap sounds wrong.
