@@ -3,7 +3,7 @@
 
 For every reels/<week>/<reel>/spec.json without a final.mp4 next to it:
   1. read visual.mp4 duration
-  2. generate instrumental music with the ElevenLabs Music API
+  2. generate instrumental music with the ElevenLabs Music API, or cut the AKITA theme ("music": {"theme": true})
   3. optionally generate a voice-over with ElevenLabs Text to Speech
   4. mix with ffmpeg into final.mp4 (H.264 video copied, AAC audio)
 A spec may also ask for a short voice sample (voice-sample.mp3) so a voice can be approved.
@@ -23,6 +23,7 @@ from pathlib import Path
 API = "https://api.elevenlabs.io/v1"
 KEY = os.environ.get("ELEVENLABS_API_KEY", "").strip()
 ROOT = Path(__file__).resolve().parent.parent
+THEME = ROOT / "audio" / "theme.m4a"
 FALLBACK_VOICES = ["Brian", "Chris", "Liam"]
 _voice_cache = None
 
@@ -121,15 +122,31 @@ def duration(path):
     return float(out.stdout.strip())
 
 
+def theme(seconds, out):
+    # Cut from the end of the theme, so every Reel finishes on the same notes
+    start = max(0.0, duration(THEME) - seconds)
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", f"{start:.3f}", "-i", str(THEME),
+                    "-c:a", "libmp3lame", "-b:a", "192k", str(out)], check=True)
+
+
 def mix(folder, visual, dur, spec):
     music_vol = float(spec.get("music_volume", 0.9))
     fade_start = max(0.0, dur - 1.2)
     inputs = ["-i", str(visual), "-i", str(folder / "music.mp3")]
     if (folder / "voiceover.mp3").exists():
         inputs += ["-i", str(folder / "voiceover.mp3")]
-        filt = (f"[1:a]atrim=0:{dur},volume={min(music_vol, 0.3)},afade=t=out:st={fade_start}:d=1.2[m];"
-                f"[2:a]adelay={int(spec.get('voiceover_delay_ms', 300))}|{int(spec.get('voiceover_delay_ms', 300))},volume=1.0[v];"
-                f"[m][v]amix=inputs=2:duration=first:normalize=0[a]")
+        delay = int(spec.get("voiceover_delay_ms", 300))
+        if spec["music"].get("theme"):
+            # Quiet under the voice, then full strength as the sound mark once it stops
+            end = delay / 1000 + duration(folder / "voiceover.mp3")
+            level = f"if(lt(t,{end:.2f}),0.14,if(lt(t,{end + 0.6:.2f}),0.14+(t-{end:.2f})/0.6*0.86,1))"
+            filt = (f"[1:a]aresample=48000,atrim=0:{dur},volume='{level}':eval=frame,afade=t=out:st={dur - 1}:d=1[m];"
+                    f"[2:a]aresample=48000,aformat=channel_layouts=stereo,adelay={delay}|{delay},volume=1.6[v];"
+                    f"[m][v]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.89[a]")
+        else:
+            filt = (f"[1:a]atrim=0:{dur},volume={min(music_vol, 0.3)},afade=t=out:st={fade_start}:d=1.2[m];"
+                    f"[2:a]adelay={delay}|{delay},volume=1.0[v];"
+                    f"[m][v]amix=inputs=2:duration=first:normalize=0[a]")
     else:
         filt = f"[1:a]atrim=0:{dur},volume={music_vol},afade=t=in:st=0:d=0.4,afade=t=out:st={fade_start}:d=1.2[a]"
     cmd = ["ffmpeg", "-y", "-loglevel", "error", *inputs, "-filter_complex", filt,
@@ -158,7 +175,10 @@ def main():
         if spec.get("voice_sample"):
             vs = spec["voice_sample"]
             tts(vs["text"], vs.get("voice", "Brian"), folder / "voice-sample.mp3")
-        music(spec["music"]["prompt"], dur, folder / "music.mp3")
+        if spec["music"].get("theme"):
+            theme(dur, folder / "music.mp3")
+        else:
+            music(spec["music"]["prompt"], dur, folder / "music.mp3")
         if spec.get("voiceover"):
             vo = spec["voiceover"]
             tts(vo["text"], vo.get("voice", "Brian"), folder / "voiceover.mp3")
