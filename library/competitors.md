@@ -43,7 +43,9 @@ The full analysis is in the market report "AKITA Sales competitor landscape" (1 
 ## Coverage
 
 - Metricool tracks competitors on Instagram, Facebook and YouTube (and X, Bluesky, Twitch). Not LinkedIn or TikTok.
-- In Metricool now (added 1 November 2026): Instagram salesrabbit, repcardapp, salesscreen, getplecto, spotio; Facebook and YouTube for SalesRabbit, RepCard, SalesScreen, Plecto, SPOTIO, Pointagram, Knockio.
-- Suggested additions: Facebook evergiving and Spinify, Instagram salesdock, YouTube Spinify (@spinify_).
+- In Metricool (checked 1 November 2026):
+  - Instagram: salesrabbit, spotio, repcardapp, salesscreen, getplecto, salesdock
+  - Facebook: SalesRabbit, Spinify, RepCard, SPOTIO, Plecto, SalesScreen, Pointagram, Evergiving, Knockio
+  - YouTube: SalesRabbit, RepCard, SalesScreen, Plecto, SPOTIO, Knockio, Pointagram, Spinify
 - LinkedIn is where Beest, Ecanvasser, Evergiving and most B2B competitors post. That needs Apify or manual review, on hold for now.
 - Meta Ad Library works only through the built-in browser on Mike's computer, and Facebook asks for Mike's approval on every page. Cloud scheduled tasks cannot reach it.
