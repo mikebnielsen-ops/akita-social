@@ -48,6 +48,13 @@ If the social-copywriter skill is available, use it when writing or revising pos
 
 Mike rejected an earlier, more polished batch as "not good": too long, too corporate, not creative. Keep it punchy.
 
+### Mike's corrections (keep adding to this list)
+
+- Points (5 November 2026): AKITA can count in points, it does not always. Never say "AKITA counts points, not sales". Say that the company decides which products count in the budget, on the reps' stats and in competitions, and that with points the sales that count toward the budget and matter most give the most points.
+- Team leaders (5 November 2026): the message is that AKITA removes the spreadsheets, so leaders can spend their time where it matters most: in the field with their reps, helping them perform better.
+- Topics (5 November 2026): two pieces about the same situation or the same AKITA feature within 6 weeks count as a repeat, even with a new hook.
+- When a claim about what AKITA does changes, write the new text for Mike first and build the video only after his OK.
+
 ## Weekly mix
 
 5 image posts plus 2 Reels per week, Monday to Friday.
@@ -94,6 +101,7 @@ Rules for every Reel:
 - People in Reels are AI-made. Do not film real reps, customers or passers-by.
 - Scenes with people are real video: the people move. Never a zoom on a still image.
 - A rep is never alone in a shot. Either the rep is talking with a customer, or two reps are talking or giving a high five. Very important.
+- At a door, the customer stands in their own doorway and the rep stands outside. Never the other way round. Mike rejected two clips for this on 5 November 2026.
 - The place must feel alive: stocked shelves and other people in the background, never an empty location. Nobody may appear from nowhere or walk into a wall. Keep the people from the start image and let them stay in place with small movements. Check the background frame by frame.
 - Show start images to Mike and get his OK before making any video.
 - AI people are fictional. Never present one as a real rep, employee or customer. No testimonials, quotes or results from them.
