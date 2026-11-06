@@ -1,6 +1,6 @@
 # Blog seed keywords
 
-Seed keywords for the blog plan (Blog plan tab in the marketing plan). Claude runs these in the keyword tool to get search volume and difficulty, and uses the results to reorder the articles. Main market: United Kingdom (English searches); check Denmark, Norway and Sweden as well. Keyword research may use words like "stand" because people search that way; published copy still says "location".
+Seed keywords for the blog plan (Blog plan tab in the marketing plan). Claude runs these in the keyword tool to get search volume and difficulty, and uses the results to reorder the articles. Markets (English searches): United Kingdom, United States, Australia, Ireland, Denmark, Norway, Sweden, Finland, Germany and the Netherlands. Keyword research may use words like "stand" because people search that way; published copy still says "location".
 
 | # | Article | Seed keywords |
 | --- | --- | --- |

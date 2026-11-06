@@ -6,7 +6,7 @@ This file tells Claude how to run AKITA Sales' social media every week. The sche
 
 Owners, CEOs and sales directors at companies that sell in the field.
 
-- Primary markets: Denmark, Norway, Sweden and Finland. Secondary: England, Germany, the Netherlands, Belgium, France, Italy, Spain and others.
+- Primary markets: Denmark, Norway, Sweden and Finland. Secondary: England, Germany, the Netherlands, Belgium, France, Italy, Spain, Australia, the USA and others. Mike, 6 November 2026: the whole world is a potential market.
 - Primary buyers: field marketing (reps at locations in shops, squares, fairs, pedestrian streets and airports), charity and NGO fundraising, door-to-door sales, and companies with driving sales reps, both in-house and selling for others. Secondary: telemarketing.
 - Rotate the buyer types across the week, so not every post is written for field marketing.
 
