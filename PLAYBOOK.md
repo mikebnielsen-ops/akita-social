@@ -239,6 +239,7 @@ A desk document with `correctionOf` is a corrected version of an article that is
 - Publish or schedule anything that is not approved on the desk.
 - Comment, like, DM or follow from any account.
 - Invent customer quotes, results or numbers, name AM or AM DK anywhere, or use AM as a customer reference (it was Mike's own company).
+- Say or hint that AKITA is built in, made in or run from Denmark, or that it is a Danish company (Mike, 6 November 2026: it is built in the UAE, and its origin doesn't need to be mentioned at all). No Danish cities, names or phone numbers in English examples either.
 - Present an AI-made person as a real rep, employee or customer.
 - Show data or names from real AKITA customers.
 - Post in any language but English.
