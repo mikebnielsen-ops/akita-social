@@ -56,6 +56,7 @@ Mike rejected an earlier, more polished batch as "not good": too long, too corpo
 - When a claim about what AKITA does changes, write the new text for Mike first and build the video only after his OK.
 - AM (6 November 2026): never name AM or AM DK in any public content, including posts, Reels, captions and blog articles. Mike's background is simply that he has run field marketing for 20 years.
 - Photos of Mike (6 November 2026): real photos of Mike may be used in some posts and blog articles. Use only photos he has supplied.
+- Door-to-door (6 November 2026): Mike has never run door-to-door sales. His experience is field marketing at locations. Never write as if he has door-to-door experience. Door-to-door content is built from outside research and rewritten in our own words.
 - Field images (6 November 2026): besides AKITA screenshots, use images and short clips that look like real field work (a shopping centre, a street, a front door). They are made with AI and follow the AI rules in this file.
 
 ## Weekly mix
