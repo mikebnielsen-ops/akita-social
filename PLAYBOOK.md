@@ -194,14 +194,32 @@ Nothing goes public before Mike approves it on the desk. This repo is public, so
 - AM manuals (Mike's Drive, folder "AM manualer"): use the know-how only and rewrite it from scratch. No copied text or layout, no AM slogans or internal names, no client names, contracts or figures from the Drive. Leave out what would not hold up in public today, such as the sick-leave rules, judging customers by their looks, physical contact with customers and the 70/22/8 body-language figure.
 - Images: AKITA demo-company screenshots, AI field images or clips (the AI rules in this file apply), branded cards, or photos Mike has supplied (Drive folder "AKITA blog photos").
 - Blog cover: 1200x630 with `python3 scripts/render_hero.py '{...}' cover.png` (same fields as render_card.py), or an AI field image. The words on a cover must be true on their own: no study figure shown as a general fact.
-- Announce every new article on LinkedIn and Facebook: one image post the day after it goes live, problem-first, with the article's link and its cover. Instagram is left out until its bio links to the blog.
-- Fact-check before the desk: a separate subagent checks every factual claim against its source, and anything it can't confirm is fixed or cut.
-- Every article ends with two or three sentences on what AKITA does about the problem and one link to the demo or contact page. It links to two other AKITA articles and to the product page that fits.
+- Every article ends with two or three sentences on what AKITA does about the problem, under a heading that is not "How AKITA helps" (the site's own box under every article already uses that name and has the demo button, so articles have no demo link of their own). Every AKITA feature named must exist in the app today. It links to two other live AKITA articles and to the product page that fits.
+- Cadence: one article a week, live on Thursday at 09:00 Copenhagen time (from 12 November 2026). The desk document's `scheduledAt` is that time. An article with a `holdReason` field waits until Claude removes the field.
+- Fact-check (Mike, 6 November 2026: "ekstremt vigtigt, at disse blogindlæg er korrekte i hvad de siger og ægte"): before an article goes on the desk, a separate subagent that did not write it checks every claim. Laws and figures against the source linked in the article (the source must say it, for that country and year). Mike's own methods against his manuals. AKITA features against the app's code (repo akita-sales-sparkle, read only). Example numbers must be labelled as examples, and the maths must add up. Anything it can't confirm is fixed or cut, and the claudeNote says the check was done.
+- Corrections to a live article: small fixes such as a moved link or an outdated source go on the desk as a "changes" proposal for Mike; nothing in a live article changes without his approval.
 
-- Publishing (repo mikebnielsen-ops/Akitasales_mainpage, private): follow README "How to publish an article". One file `content/blog/<slug>.md(x)` with front matter, images in `public/blog/<slug>/`. Run `npm ci` and `npm run build` before pushing: the build writes `cover.webp` next to the image, and that WebP must be committed too, or the cover is missing on the live page. Push to `main` goes live in a few minutes. Never change code in that repo; CLAUDE.md there has the rules.
-- The site adds its own "How AKITA helps" box with the demo button under every article, so articles end without their own demo link.
-- Link only to articles that are already live. When a new article goes live, add links to it from older articles where they fit.
-- After publishing: set the desk document to status "published" with `publicUrl`, then check the live page.
+### Publishing an approved article
+
+Repo mikebnielsen-ops/Akitasales_mainpage (private, add_repo with access "push"). Read its CLAUDE.md and README "How to publish an article" every time. Only files under `content/blog/` and `public/blog/` are touched; code, design and vercel.json changes need a branch, localhost testing and Mike's "ja, send det live".
+
+1. Text: Mike's `editedTitle`, `editedDescription` and `editedText` when present, else `label`, `description` and `text`. If he edited, add the lessons to "Blog corrections" below first.
+2. File `content/blog/<slug>.md`, or `.mdx` when the article uses a component. Front matter as in the README: title, description, slug, date (today), author Mike Nielsen, image `/blog/<slug>/cover.png` (the desk hero image, downloaded with Artifact read path=<assetId>), imageAlt (the media alt text), tags, draft false.
+3. Placeholders: `[CALCULATOR: What a rep who quits really costs ...]` becomes `<RepCostCalculator />` (.mdx). Any other placeholder, or a component the README doesn't list: stop and tell Mike.
+4. Remove a trailing "Book a demo" link if the text has one. If a section heading is "How AKITA helps", rename it "Where AKITA fits".
+5. `npm ci` and `npm run build` must pass. Commit the article, `cover.png` and the generated `cover.webp`. Push to `main`.
+6. Wait for the Vercel status: `gh api repos/mikebnielsen-ops/Akitasales_mainpage/commits/<sha>/status --jq .state` must be "success". If it fails, the live site stays as it was: tell Mike.
+7. Set the desk document to status "published" with `publicUrl` (https://www.akitasales.com/blog/<slug>) and `publishedAt`.
+8. Add links to the new article from older live articles where they fit (a separate commit, text only, same build check). Its announcement post can now be scheduled.
+
+### Announcing an article
+
+- One image post per article on LinkedIn and Facebook, 12:00 the day after it goes live (Monday when that is a weekend). Format "Image post", field `announces` = the blog document's id, the cover as image, the full article URL in the text. Problem first, then what the article gives the reader, then "Read it here:" and the link. Hashtags: three, from the article's topic.
+- Instagram is left out: links in captions can't be clicked there. Revisit when the Instagram bio links to the blog.
+- The approvals run schedules an announcement only after its article has status "published", so the link never points to an empty page.
+
+- The site adds its own "How AKITA helps" box with the demo button under every article.
+- Link only to articles that are already live.
 
 ### Blog corrections (keep adding to this list)
 
