@@ -212,10 +212,13 @@ Repo mikebnielsen-ops/Akitasales_mainpage (private, add_repo with access "push")
 7. Set the desk document to status "published" with `publicUrl` (https://www.akitasales.com/blog/<slug>) and `publishedAt`.
 8. Add links to the new article from older live articles where they fit (a separate commit, text only, same build check). Its announcement post can now be scheduled.
 
+A desk document with `correctionOf` is a corrected version of an article that is already live. On approval: replace the body (and title and description if they changed) in the existing `content/blog/<slug>.md(x)`, keep `date` and `slug`, add `updated: <today>` to the front matter, then steps 5 and 6. Keep any links to newer live articles that were added after the first version. Set the correction document to "published" and leave the original document as it is. No new announcement post.
+
 ### Announcing an article
 
 - One image post per article on LinkedIn and Facebook, 12:00 the day after it goes live (Monday when that is a weekend). Format "Image post", field `announces` = the blog document's id, the cover as image, the full article URL in the text. Problem first, then what the article gives the reader, then "Read it here:" and the link. Hashtags: three, from the article's topic.
 - Instagram is left out: links in captions can't be clicked there. Revisit when the Instagram bio links to the blog.
+- Corrections of a live article (documents with `correctionOf`) never get an announcement post.
 - The approvals run schedules an announcement only after its article has status "published", so the link never points to an empty page.
 
 - The site adds its own "How AKITA helps" box with the demo button under every article.
