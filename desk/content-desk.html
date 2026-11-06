@@ -133,6 +133,25 @@ input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
 .empty { text-align: left; background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius); padding: 22px; color: var(--muted); }
 .empty strong { color: var(--ink); display: block; margin-bottom: 4px; font-size: 16px; }
 .banner { font-size: 13px; color: var(--bad); background: var(--bad-bg); border-radius: 10px; padding: 10px 12px; }
+/* Blog articles: rendered Markdown inside the same card, collapsed until opened. */
+.article { white-space: normal; font-size: 15px; line-height: 1.6; max-height: 22em; }
+.article > :first-child { margin-top: 0; }
+.article > :last-child { margin-bottom: 0; }
+.article h2 { font-size: 18px; line-height: 1.3; margin: 18px 0 6px; color: var(--navy); font-weight: 700; text-transform: none; letter-spacing: 0; }
+.article h3 { font-size: 16px; line-height: 1.3; margin: 14px 0 4px; color: var(--navy); }
+.article p { margin: 0 0 10px; }
+.article ul, .article ol { margin: 0 0 10px; padding-left: 22px; }
+.article li { margin: 2px 0; }
+.article blockquote { margin: 0 0 10px; padding: 4px 0 4px 12px; border-left: 3px solid var(--accent); color: var(--muted); }
+.article a { color: var(--accent); }
+.article code { font-family: var(--font-meta); font-size: 13px; background: var(--surface-2); border-radius: 4px; padding: 1px 4px; }
+.article .placeholder { display: block; background: var(--warn-bg); color: var(--warn); border-radius: 8px; padding: 8px 10px; font-size: 13px; font-weight: 600; }
+.seo { display: grid; gap: 4px; font-size: 13px; background: var(--surface-2); border-radius: 10px; padding: 10px 12px; }
+.seo .k { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.seo .v { overflow-wrap: anywhere; }
+input.fieldin { width: 100%; font: 14px/1.4 var(--font-ui); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+input.fieldin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+textarea.long { min-height: 480px; font-family: var(--font-meta); font-size: 13px; }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); background: var(--navy); color: var(--bg); padding: 10px 14px; border-radius: 10px; font-size: 13px; font-weight: 600; z-index: 20; }
 @media (prefers-reduced-motion: no-preference) { .card { transition: opacity .2s ease; } }
 </style>
@@ -141,7 +160,7 @@ input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
   <header class="top">
     <div class="brandrow">
       <div>
-        <div class="eyebrow">AKITA Sales · Social</div>
+        <div class="eyebrow">AKITA Sales · Social and blog</div>
         <h1>Content Desk</h1>
       </div>
       <div class="summary" id="summary">Loading posts…</div>
@@ -198,6 +217,45 @@ input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
   function dayKey(iso) { return fmt(iso, "Europe/Copenhagen", { year: "numeric", month: "2-digit", day: "2-digit" }); }
   function dayLabel(iso) { return fmt(iso, "Europe/Copenhagen", { weekday: "long", day: "numeric", month: "long" }); }
   function time(iso, tz) { return fmt(iso, tz, { hour: "2-digit", minute: "2-digit", hour12: false }); }
+
+  function isBlog(p) { return p.format === "Blog article"; }
+
+  // Small, safe Markdown renderer for blog drafts: builds DOM nodes, never innerHTML.
+  function inline(text, parent) {
+    var re = /(\*\*([^*]+)\*\*|\*([^*]+)\*|`([^`]+)`|\[([^\]]+)\]\((https?:\/\/[^\s)]+)\))/g, last = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > last) parent.appendChild(document.createTextNode(text.slice(last, m.index)));
+      if (m[2]) parent.appendChild(el("strong", { text: m[2] }));
+      else if (m[3]) parent.appendChild(el("em", { text: m[3] }));
+      else if (m[4]) parent.appendChild(el("code", { text: m[4] }));
+      else if (m[5]) parent.appendChild(el("a", { href: m[6], target: "_blank", rel: "noopener", text: m[5] }));
+      last = re.lastIndex;
+    }
+    if (last < text.length) parent.appendChild(document.createTextNode(text.slice(last)));
+    return parent;
+  }
+  function markdown(src, box) {
+    var lines = String(src || "").replace(/\r/g, "").split("\n"), i = 0, para = [];
+    function flush() { if (para.length) { box.appendChild(inline(para.join(" "), el("p"))); para = []; } }
+    while (i < lines.length) {
+      var ln = lines[i], t = ln.trim(), m;
+      if (!t) { flush(); i++; continue; }
+      if ((m = /^(#{1,3})\s+(.*)$/.exec(t))) { flush(); box.appendChild(inline(m[2], el(m[1].length === 1 ? "h2" : m[1].length === 2 ? "h2" : "h3"))); i++; continue; }
+      if (/^\[(CALCULATOR|IMAGE|PLACEHOLDER)[^\]]*\]$/i.test(t)) { flush(); box.appendChild(el("span", { class: "placeholder", text: t })); i++; continue; }
+      if (/^>\s?/.test(t)) { flush(); var q = []; while (i < lines.length && /^>\s?/.test(lines[i].trim())) { q.push(lines[i].trim().replace(/^>\s?/, "")); i++; } box.appendChild(inline(q.join(" "), el("blockquote"))); continue; }
+      if (/^([-*])\s+/.test(t) || /^\d+[.)]\s+/.test(t)) {
+        flush(); var ordered = /^\d/.test(t), list = el(ordered ? "ol" : "ul");
+        while (i < lines.length && (ordered ? /^\d+[.)]\s+/ : /^[-*]\s+/).test(lines[i].trim())) {
+          list.appendChild(inline(lines[i].trim().replace(/^([-*]|\d+[.)])\s+/, ""), el("li"))); i++;
+        }
+        box.appendChild(list); continue;
+      }
+      para.push(t); i++;
+    }
+    flush();
+    return box;
+  }
+  function words(s) { return (String(s || "").match(/\S+/g) || []).length; }
 
   function isReview(p) { return p.status === "pending" || !p.status; }
   function isDecided(p) { return !isReview(p); }
@@ -264,11 +322,46 @@ input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
     var when = el("div", { class: "when" }, [time(p.scheduledAt, "Europe/Copenhagen") + " CPH ", el("span", { text: "· " + time(p.scheduledAt, "Asia/Dubai") + " Dubai" })]);
     c.appendChild(el("div", { class: "meta" }, [el("div", { class: "chips" }, [when]), el("span", { class: "status st-" + st, text: STATUS[st] || st })]));
     c.appendChild(chips);
-    if (p.label) c.appendChild(el("h3", { class: "label", text: p.label }));
-    var subBits = [p.format, p.pillar].filter(Boolean).join(" · ");
+    var blog = isBlog(p);
+    var title = blog ? (p.editedTitle || p.label) : p.label;
+    var desc = p.editedDescription || p.description || "";
+    if (title) c.appendChild(el("h3", { class: "label", text: title }));
+    var subBits = [p.format, p.pillar, blog ? words(text) + " words" : ""].filter(Boolean).join(" · ");
     if (subBits) c.appendChild(el("div", { class: "sub", text: subBits }));
+    if (blog && ui.editing !== p.id) {
+      var seo = el("div", { class: "seo" });
+      if (desc) seo.appendChild(el("div", null, [el("div", { class: "k", text: "Google description" }), el("div", { class: "v", text: desc })]));
+      if (p.slug) seo.appendChild(el("div", null, [el("div", { class: "k", text: "Address" }), el("div", { class: "v", text: "akitasales.com/blog/" + p.slug })]));
+      if (p.keyword) seo.appendChild(el("div", null, [el("div", { class: "k", text: "Written for the search" }), el("div", { class: "v", text: p.keyword })]));
+      if (seo.childNodes.length) c.appendChild(seo);
+    }
 
-    if (ui.editing === p.id) {
+    if (ui.editing === p.id && blog) {
+      var tIn = el("input", { type: "text", class: "fieldin", id: "title-" + p.id, autocomplete: "off" }); tIn.value = title || "";
+      var dIn = el("textarea", { class: "short", id: "desc-" + p.id, "aria-label": "Google description" }); dIn.value = desc;
+      var dCnt = el("span", { class: "count", text: dIn.value.length + " / 155 characters" });
+      dIn.addEventListener("input", function () { dCnt.textContent = dIn.value.length + " / 155 characters"; });
+      var bTa = el("textarea", { class: "long", id: "edit-" + p.id, "aria-label": "Edit article" }); bTa.value = text;
+      var bCnt = el("span", { class: "count", text: words(bTa.value) + " words" });
+      bTa.addEventListener("input", function () { bCnt.textContent = words(bTa.value) + " words"; });
+      c.appendChild(el("div", { class: "editor" }, [
+        el("label", { class: "fieldlabel", for: "title-" + p.id, text: "Title" }), tIn,
+        el("label", { class: "fieldlabel", for: "desc-" + p.id, text: "Google description" }), dIn, dCnt,
+        el("label", { class: "fieldlabel", for: "edit-" + p.id, text: "Article (## heading, - list, **bold**)" }), bTa, bCnt,
+        el("div", { class: "actions" }, [
+          el("button", { class: "primary", id: "save-" + p.id, text: "Save and approve", disabled: busy || null, onclick: function () {
+            var v = bTa.value.trim(); if (!v) { bTa.focus(); return; }
+            ui.editing = null;
+            write(p.id, { status: "approved", editedText: v, editedTitle: tIn.value.trim(), editedDescription: dIn.value.trim() }, "Saved and approved");
+          } }),
+          el("button", { class: "ghost", id: "cancel-edit-" + p.id, text: "Cancel", onclick: function () { ui.editing = null; render(); } })
+        ])
+      ]));
+    } else if (blog) {
+      if (p.editedText) c.appendChild(el("div", { class: "edited", text: "Your edited version" }));
+      c.appendChild(markdown(text, el("div", { class: "copy article" + (ui.open[p.id] ? " open" : "") })));
+      c.appendChild(el("button", { class: "link", id: "more-" + p.id, text: ui.open[p.id] ? "Show less" : "Read the full article", onclick: function () { ui.open[p.id] = !ui.open[p.id]; render(); } }));
+    } else if (ui.editing === p.id) {
       var ta = el("textarea", { id: "edit-" + p.id, "aria-label": "Edit post text" });
       ta.value = text;
       var cnt = el("span", { class: "count", text: ta.value.length + " characters" });
@@ -290,7 +383,7 @@ input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
       c.appendChild(copy);
       if (text.length >= 420) c.appendChild(el("button", { class: "link", id: "more-" + p.id, text: ui.open[p.id] ? "Show less" : "Show the full post", onclick: function () { ui.open[p.id] = !ui.open[p.id]; render(); } }));
     }
-    if (tags && ui.editing !== p.id) c.appendChild(el("div", { class: "tags", text: tags }));
+    if (tags && !blog && ui.editing !== p.id) c.appendChild(el("div", { class: "tags", text: tags }));
     if (p.media && p.media.length) {
       c.appendChild(el("div", { class: "media" }, p.media.map(function (m) {
         var isVideo = m.kind === "video" || /\.mp4($|\?)/i.test(m.url || "");
@@ -324,6 +417,8 @@ input.tagsin:focus-visible { outline: 2px solid var(--accent); outline-offset: 2
         acts.push(el("button", { class: "ghost", id: "undo-" + p.id, text: "Move back to review", disabled: busy || null, onclick: function () { write(p.id, { status: "pending" }, "Moved back to review"); } }));
       }
       c.appendChild(el("div", { class: "actions" }, acts));
+    } else if (locked && p.publicUrl) {
+      c.appendChild(el("a", { href: p.publicUrl, target: "_blank", rel: "noopener", class: "sub", text: "Open the live article" }));
     } else if (locked && p.plannerUrl) {
       c.appendChild(el("a", { href: p.plannerUrl, target: "_blank", rel: "noopener", class: "sub", text: "Open in Metricool" }));
     }

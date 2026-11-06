@@ -172,6 +172,7 @@ Do not copy:
 - Media for the desk: upload with the Artifact tool (publish, url = desk URL, asset: true) and store `/_blob/<id>` in `media.url`. For Reels, upload the silent `visual.mp4` with kind "video".
 - Status flow: pending → approved | changes | rejected. Claude sets scheduled (with plannerUrl, metricoolUuid) and later published.
 - Use Mike's `editedText` and `editedHashtags` when present.
+- Blog articles: format "Blog article", channels ["blog"], `label` = title, `text` = the article in Markdown (## headings, lists, **bold**, [links](https://...)), plus `description` (Google description, max 155 characters), `slug`, `keyword` (the target search with its monthly volume) and `media` (hero image). Mike's edits arrive as `editedText`, `editedTitle` and `editedDescription`. A calculator or other placeholder is written on its own line as `[CALCULATOR: ...]`. After publishing, set status "published" and `publicUrl`.
 
 ## Publishing (after approval only)
 
