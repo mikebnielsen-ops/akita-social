@@ -54,6 +54,9 @@ Mike rejected an earlier, more polished batch as "not good": too long, too corpo
 - Team leaders (5 November 2026): the message is that AKITA removes the spreadsheets, so leaders can spend their time where it matters most: in the field with their reps, helping them perform better.
 - Topics (5 November 2026): two pieces about the same situation or the same AKITA feature within 6 weeks count as a repeat, even with a new hook.
 - When a claim about what AKITA does changes, write the new text for Mike first and build the video only after his OK.
+- AM (6 November 2026): never name AM or AM DK in any public content, including posts, Reels, captions and blog articles. Mike's background is simply that he has run field marketing for 20 years.
+- Photos of Mike (6 November 2026): real photos of Mike may be used in some posts and blog articles. Use only photos he has supplied.
+- Field images (6 November 2026): besides AKITA screenshots, use images and short clips that look like real field work (a shopping centre, a street, a front door). They are made with AI and follow the AI rules in this file.
 
 ## Weekly mix
 
@@ -182,7 +185,7 @@ Nothing goes public before Mike approves it on the desk. This repo is public, so
 
 - Publish or schedule anything that is not approved on the desk.
 - Comment, like, DM or follow from any account.
-- Invent customer quotes, results or numbers, or use AM as a customer reference (it was Mike's own company).
+- Invent customer quotes, results or numbers, name AM or AM DK anywhere, or use AM as a customer reference (it was Mike's own company).
 - Present an AI-made person as a real rep, employee or customer.
 - Show data or names from real AKITA customers.
 - Post in any language but English.
