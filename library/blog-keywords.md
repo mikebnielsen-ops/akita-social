@@ -54,3 +54,32 @@ Volumes are small everywhere. US is biggest, then UK; Australia is close to zero
 | campaign report template | 40 | 10 | - | 14 |
 
 Not our buyer: "promotional staff" (UK 170) and "field marketing agency" are searched by brands hiring an agency. Zero or near zero: why do new sales reps quit, sales rep onboarding checklist, field marketing kpis, the UK door-to-door rules terms.
+
+## Platform searches, 6 November 2026 (monthly)
+
+These belong on product pages, not blog articles. "Canvassing software" is partly political canvassing.
+
+| Keyword | US | UK | Difficulty (US) |
+| --- | --- | --- | --- |
+| door to door sales | 2,400 | 390 | 5 |
+| canvassing software | 1,900 | 480 | 0 |
+| field sales | 590 | 390 | 0 |
+| sales software | 480 | 70 | 30 |
+| sales management software | 390 | 50 | 0 |
+| sales platform | 390 | 90 | 55 |
+| sales tracking software | 320 | 30 | 1 |
+| canvassing app | 210 | 20 | 0 |
+| sales reporting software | 170 | 20 | 1 |
+| field sales crm | 90 | 10 | 1 |
+| sales tracking app | 90 | 10 | 12 |
+| door knocking app | 70 | 10 | 0 |
+| field sales management software | 70 | 10 | 0 |
+| sales dashboard software | 70 | 10 | 0 |
+| telemarketing software | 70 | 20 | 11 |
+| door to door app | 50 | 10 | 0 |
+| spotio alternative | 50 | 10 | 0 |
+| door to door sales app | 40 | 10 | 0 |
+| sales leaderboard software | 40 | 10 | 0 |
+| door to door sales software | 30 | 10 | 0 |
+
+Competitor brand searches (US / UK): SalesRabbit 4,400 / 70, SPOTIO 2,900 / 90, RepCard 880 / 10, SalesScreen 720 / 320, Plecto 590 / 210.

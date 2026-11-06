@@ -181,6 +181,20 @@ Nothing goes public before Mike approves it on the desk. This repo is public, so
 3. Schedule with Metricool `createScheduledPost`: blogId 7736058, publicationDate timezone Europe/Copenhagen, text = post text + blank line + hashtags, `linkedinData {type: post}`, `facebookData {type: POST or REEL}`, `instagramData {type: POST or REEL, isAiGenerated}`, `youtubeData {type: short, title, madeForKids: false, privacy: public}`.
 4. Update the desk document: status "scheduled", plannerUrl, metricoolUuid, publicMediaUrl.
 
+## Blog (www.akitasales.com/blog)
+
+- Plan and order: the "Blog plan" tab in the marketing plan doc (https://claude.ai/artifact/A9idPT3XYKJYTH2ZAbgWTe). One article a week, in the table's order, only rows Mike marked Yes. Search data: `library/blog-keywords.md`.
+- Mike approves every article on the Content Desk before it goes live. Once he approves, Claude publishes it straight away (Mike's decision, 6 November 2026). Code changes to the website keep the localhost rule.
+- Learn from Mike's edits (6 November 2026): when Mike edits or comments on a blog draft, compare his version with the draft and add each lesson as a dated line under "Blog corrections" below, before writing the next article. His edits on posts and Reels go under "Mike's corrections" in the same way.
+- Voice and facts: as for social. First person as Mike, British spelling, "location" never "stand", never name AM or AM DK. Mike's background is that he has run field marketing for 20 years.
+- AM manuals (Mike's Drive, folder "AM manualer"): use the know-how only and rewrite it from scratch. No copied text or layout, no AM slogans or internal names, no client names, contracts or figures from the Drive. Leave out what would not hold up in public today, such as the sick-leave rules, judging customers by their looks, physical contact with customers and the 70/22/8 body-language figure.
+- Images: AKITA demo-company screenshots, AI field images or clips (the AI rules in this file apply), branded cards, or photos Mike has supplied (Drive folder "AKITA blog photos").
+- Every article ends with two or three sentences on what AKITA does about the problem and one link to the demo or contact page. It links to two other AKITA articles and to the product page that fits.
+
+### Blog corrections (keep adding to this list)
+
+(none yet)
+
 ## Things Claude never does
 
 - Publish or schedule anything that is not approved on the desk.
