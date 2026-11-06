@@ -193,6 +193,11 @@ Nothing goes public before Mike approves it on the desk. This repo is public, so
 - Images: AKITA demo-company screenshots, AI field images or clips (the AI rules in this file apply), branded cards, or photos Mike has supplied (Drive folder "AKITA blog photos").
 - Every article ends with two or three sentences on what AKITA does about the problem and one link to the demo or contact page. It links to two other AKITA articles and to the product page that fits.
 
+- Publishing (repo mikebnielsen-ops/Akitasales_mainpage, private): follow README "How to publish an article". One file `content/blog/<slug>.md(x)` with front matter, images in `public/blog/<slug>/`. Run `npm ci` and `npm run build` before pushing: the build writes `cover.webp` next to the image, and that WebP must be committed too, or the cover is missing on the live page. Push to `main` goes live in a few minutes. Never change code in that repo; CLAUDE.md there has the rules.
+- The site adds its own "How AKITA helps" box with the demo button under every article, so articles end without their own demo link.
+- Link only to articles that are already live. When a new article goes live, add links to it from older articles where they fit.
+- After publishing: set the desk document to status "published" with `publicUrl`, then check the live page.
+
 ### Blog corrections (keep adding to this list)
 
 (none yet)
