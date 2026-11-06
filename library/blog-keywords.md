@@ -28,3 +28,29 @@ Seed keywords for the blog plan (Blog plan tab in the marketing plan). Claude ru
 | 24 | Door-to-door rules | door to door sales rules uk; doorstep selling regulations uk; door to door sales laws |
 | 25 | Cost of a rep who quits | cost of sales rep turnover; cost of employee turnover calculator |
 | - | Brand and alternatives | akita sales; plecto alternative; salesscreen alternative; beest app |
+
+## Results, 6 November 2026 (OpenSEO, monthly searches)
+
+Volumes are small everywhere. US is biggest, then UK; Australia is close to zero. Nordics and the rest of Europe not checked yet. The blog plan's order (Blog plan tab) is built on these numbers.
+
+| Keyword | US | UK | AU | Difficulty (US) |
+| --- | --- | --- | --- | --- |
+| cost of employee turnover calculator | 260 | 20 | 10 | 36 |
+| sales commission structure | 210 | 40 | 10 | 0 |
+| how to set sales targets | 170 | 10 | 10 | 5 |
+| sales leaderboard | 170 | 20 | 10 | 0 |
+| field sales management | 140 | 50 | 20 | 0 |
+| door to door sales tips | 110 | 10 | 10 | 0 |
+| door to door sales training | 110 | 10 | 10 | 8 |
+| sales contest ideas | 110 | 10 | 10 | 2 |
+| sales competition ideas | 110 | 10 | 10 | 2 |
+| daily sales report template | 90 | 10 | 10 | 2 |
+| field sales software | 90 | 10 | 10 | 0 |
+| morning huddle ideas | 90 | 10 | 10 | 0 |
+| sales gamification | 90 | 20 | 10 | 0 |
+| sales gamification software | 90 | 10 | 10 | 0 |
+| field sales app | 70 | 10 | 10 | 5 |
+| cost per sale | 50 | 10 | 10 | 9 |
+| campaign report template | 40 | 10 | - | 14 |
+
+Not our buyer: "promotional staff" (UK 170) and "field marketing agency" are searched by brands hiring an agency. Zero or near zero: why do new sales reps quit, sales rep onboarding checklist, field marketing kpis, the UK door-to-door rules terms.
