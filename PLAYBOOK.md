@@ -224,6 +224,12 @@ A desk document with `correctionOf` is a corrected version of an article that is
 - The site adds its own "How AKITA helps" box with the demo button under every article.
 - Link only to articles that are already live.
 
+### Checked facts (from fact-checks, use them so articles agree with each other)
+
+- Mike's method (manuals, checked 6 November 2026): the trainer still delivers at least budget while training a new rep. A new rep goes for budget from day one: the weekly budget in week one, the daily budget from week two. Office time on day one is three hours at most. Training is two weeks next to someone experienced, then a review. A job interview takes 1 to 1.5 hours; applicants are screened on the written application and phoned only to invite them.
+- Example pay must be legal where the example is set. UK National Living Wage from April 2026: £12.71 an hour (21 and over).
+- AKITA features: only name what is confirmed live for customers. Confirmed on demo-company screens: live sales per rep, team and location, leaderboards, competitions, the Manuals menu. Not confirmed (Onboarding is locked in the demo company): training videos with tests, contracts signed in the app. AKITA runs in the phone's browser; it is not in the App Store or Google Play.
+
 ### Blog corrections (keep adding to this list)
 
 (none yet)
