@@ -73,6 +73,8 @@ Mike rejected an earlier, more polished batch as "not good": too long, too corpo
 
 Every post must have an image. No exceptions.
 
+Reel first (weekly report, week 45, 6 November 2026): the strongest topic of the week is made as a Reel first, not as an image post. In week 45 Reels reached 10 to 100 times more people than image posts on Facebook and Instagram (best: the cost-per-sale Reel). One week of data, so check it again in the next reports.
+
 ### Launch phase (31 October to 22 November 2026)
 
 Mike's decision, 31 October 2026: post almost every day for the first three weeks so the channels have content quickly. Aim for 10 to 12 pieces a week in total, then return to the normal mix above.
