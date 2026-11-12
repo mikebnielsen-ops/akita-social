@@ -29,6 +29,7 @@ If the social-copywriter skill is available, use it when writing or revising pos
 - English only. No emojis as decoration. No hype words (game-changer, revolutionise, unlock, empower, seamless). No stock AI phrasing. Avoid em dashes.
 - 400 to 700 characters for most posts. Hashtags: 3, at the end.
 - Never invent numbers, results, customers or quotes. Opinions are fine; fake facts are not.
+- Clear on the first read (Mike's notes on w44-03 and w46-06, "doesn't make any sense", "I don't get the text"): one plain scene the reader knows, told in order, with no twist they have to work out. Human enough that people see themselves in it.
 
 ### Approved examples (week 45)
 
