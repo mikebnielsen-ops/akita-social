@@ -76,6 +76,8 @@ Every post must have an image. No exceptions.
 
 Reel first (weekly report, week 45, 6 November 2026): the strongest topic of the week is made as a Reel first, not as an image post. In week 45 Reels reached 10 to 100 times more people than image posts on Facebook and Instagram (best: the cost-per-sale Reel). One week of data, so check it again in the next reports.
 
+More Reels (weekly report, week 46, 13 November 2026): image posts reached 0 to 17 people or impressions each, on every channel, two weeks in a row, while Reels reached 18 to 121. From week 47, turn at least two of the week's planned image posts into Reels. Use Kinetic text when there is no time for AI scenes. Every post still needs an image, and the voice rules still apply.
+
 ### Launch phase (31 October to 22 November 2026)
 
 Mike's decision, 31 October 2026: post almost every day for the first three weeks so the channels have content quickly. Aim for 10 to 12 pieces a week in total, then return to the normal mix above.
