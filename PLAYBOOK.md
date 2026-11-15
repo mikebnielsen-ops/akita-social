@@ -229,13 +229,14 @@ A desk document with `correctionOf` is a corrected version of an article that is
 
 ### Checked facts (from fact-checks, use them so articles agree with each other)
 
-- Mike's method (manuals, checked 6 November 2026): the trainer still delivers at least budget while training a new rep. A new rep goes for budget from day one: the weekly budget in week one, the daily budget from week two. Office time on day one is three hours at most. Training is two weeks next to someone experienced, then a review. A job interview takes 1 to 1.5 hours; applicants are screened on the written application and phoned only to invite them.
+- Mike's method (manuals, checked 6 November 2026): the trainer still delivers at least budget while training a new rep. A new rep goes for budget from day one: the weekly budget in week one, the daily budget from week two. Office time on day one is one hour at most (Mike, 15 November 2026): no reading and no contract signing in the office, because the contract and the tests are done at home beforehand with AKITA Onboarding. The hour covers products, how you sell, clothing and kit, the leaderboard, the talk about the next 14 days, and the time and place for tomorrow. Training is two weeks next to someone experienced, then a review. A job interview takes 1 to 1.5 hours; applicants are screened on the written application and phoned only to invite them.
 - Example pay must be legal where the example is set. UK National Living Wage from April 2026: £12.71 an hour (21 and over).
 - AKITA features: only name what is confirmed in the app code (akita-sales-sparkle, read only; its help articles in supabase/help/akita_help_articles.json are the quickest check). Confirmed: live sales per rep, team and location, leaderboards, competitions and battles, Manuals (handbook, sales manual). Onboarding is a paid add-on: tests, training videos, first-day info, sales script, contract templates, contract signed in the app by the rep and the employer. Say "with the Onboarding add-on" when naming those. Other add-ons: D2D map, Competitions (Champions League), Ask AKITA logbook, Ask the Coach, Customer Score. AKITA runs in the phone's browser; it is not in the App Store or Google Play.
 
 ### Blog corrections (keep adding to this list)
 
-(none yet)
+- 15 November 2026 (blog-03): don't write "high streets"; Mike finds it odd. Use "pedestrian streets" or "shopping centres".
+- 15 November 2026 (blog-03): day one is one hour in the office, not three. The contract and the tests happen beforehand in AKITA Onboarding, so office time never goes on paperwork. Check that posts and articles agree with how AKITA is used today, not only with the old manuals.
 
 ## Things Claude never does
 
