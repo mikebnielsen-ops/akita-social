@@ -58,6 +58,7 @@ Mike rejected an earlier, more polished batch as "not good": too long, too corpo
 - AM (6 November 2026): never name AM or AM DK in any public content, including posts, Reels, captions and blog articles. Mike's background is simply that he has run field marketing for 20 years.
 - Photos of Mike (6 November 2026): real photos of Mike may be used in some posts and blog articles. Use only photos he has supplied.
 - Door-to-door (6 November 2026): Mike has never run door-to-door sales. His experience is field marketing at locations. Never write as if he has door-to-door experience. Door-to-door content is built from outside research and rewritten in our own words.
+- Telemarketing (17 November 2026): AKITA also has its own dialer (ringesystem), so everything about a sales team sits in one system: phone, field and door. Use it as part of "One system instead of five". Until Mike confirms what the dialer can do, only say that AKITA has its own dialer and that calls and sales are in the same system. Telemarketing gets its own posts and Reels in the rotation.
 - Field images (6 November 2026): besides AKITA screenshots, use images and short clips that look like real field work (a shopping centre, a street, a front door). They are made with AI and follow the AI rules in this file.
 
 ## Weekly mix
