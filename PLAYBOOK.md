@@ -82,6 +82,8 @@ Reel first (weekly report, week 45, 6 November 2026): the strongest topic of the
 
 More Reels (weekly report, week 46, 13 November 2026): image posts reached 0 to 17 people or impressions each, on every channel, two weeks in a row, while Reels reached 18 to 121. From week 47, turn at least two of the week's planned image posts into Reels. Use Kinetic text when there is no time for AI scenes. Every post still needs an image, and the voice rules still apply.
 
+Normal week after launch (weekly report, week 47, 20 November 2026): image posts reached 2 to 4 views each for the third week in a row, while the best Reel reached 193 on Facebook. When the launch phase ends, the normal week is 3 image posts plus 4 Reels instead of 5 plus 2. This applies to everything planned from now on. Check it again in the next reports.
+
 ### Launch phase (31 October to 22 November 2026)
 
 Mike's decision, 31 October 2026: post almost every day for the first three weeks so the channels have content quickly. Aim for 10 to 12 pieces a week in total, then return to the normal mix above.
